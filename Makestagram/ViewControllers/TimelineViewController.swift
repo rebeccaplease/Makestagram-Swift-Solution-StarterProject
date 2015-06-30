@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 var photoTakingHelper: PhotoTakingHelper?
 
@@ -39,6 +40,14 @@ class TimelineViewController: UIViewController {
         // instantiate photo taking class, provide callback when photo is selected
         photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!) { (image: UIImage?) in //trailing closure
             println("Received a callback")
+            
+            let imageData = UIImageJPEGRepresentation(image, 0.8) //turn UI image into image data, then image file
+            let imageFile = PFFile(data: imageData)
+            imageFile.save()
+            
+            let post = PFObject(className: "Post") //save file to post
+            post["imageFile"] = imageFile
+            post.save()
         }
     }
 }
