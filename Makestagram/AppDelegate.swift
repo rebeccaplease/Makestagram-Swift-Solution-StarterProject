@@ -29,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("No logged in user :(")
         }
         
+        let acl = PFACL()
+        acl.setPublicReadAccess(true) //public read
+        PFACL.setDefaultACL(acl, withAccessForCurrentUser: true) //default: user write to own post
+        
         return true
     }
     
