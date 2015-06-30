@@ -16,6 +16,7 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
     @NSManaged var imageFile: PFFile?
     @NSManaged var user: PFUser?
     var image: UIImage?
+    var photoUploadTask: UIBackgroundTaskIdentifier?
     
     //MARK: PFSubclassing Protocol
     //connect parse class and swift class
@@ -41,7 +42,16 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         //get reference to image
         let imageData = UIImageJPEGRepresentation(image, 0.8) //turn UI image into image data, then image file
         let imageFile = PFFile(data: imageData)
-        imageFile.saveInBackgroundWithBlock(nil)
+        
+        //finish uploading in alloted time if app is closed
+        photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+        }
+        
+        //end task after save (completion handler)
+        imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+        }
         
         //associate post with current user
         user = PFUser.currentUser()
