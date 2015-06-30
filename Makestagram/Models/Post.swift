@@ -41,10 +41,10 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         //get reference to image
         let imageData = UIImageJPEGRepresentation(image, 0.8) //turn UI image into image data, then image file
         let imageFile = PFFile(data: imageData)
-        imageFile.save()
+        imageFile.saveInBackgroundWithBlock(nil)
         //store image in parse
         self.imageFile = imageFile
-        save()
+        saveInBackgroundWithBlock(nil)
         
     }
 }
