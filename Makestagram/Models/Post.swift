@@ -42,6 +42,9 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         let imageData = UIImageJPEGRepresentation(image, 0.8) //turn UI image into image data, then image file
         let imageFile = PFFile(data: imageData)
         imageFile.saveInBackgroundWithBlock(nil)
+        
+        //associate post with current user
+        user = PFUser.currentUser()
         //store image in parse
         self.imageFile = imageFile
         saveInBackgroundWithBlock(nil)
