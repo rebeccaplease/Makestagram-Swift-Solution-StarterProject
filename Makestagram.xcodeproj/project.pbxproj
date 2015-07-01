@@ -12,6 +12,7 @@
 		090484681B41C25C00348F86 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090484671B41C25C00348F86 /* PhotoTakingHelper.swift */; };
 		090484701B42E01900348F86 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904846F1B42E01900348F86 /* Post.swift */; };
 		090484721B43105300348F86 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090484711B43105300348F86 /* TimelineViewController.swift */; };
+		09B4013E1B44565600D4FFEB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */; };
 		62551B6C1B06BF6D000913E4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B631B06BF6D000913E4 /* Bolts.framework */; };
 		62551B6D1B06BF6D000913E4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B641B06BF6D000913E4 /* FBSDKCoreKit.framework */; };
 		62551B6E1B06BF6D000913E4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B651B06BF6D000913E4 /* FBSDKLoginKit.framework */; };
@@ -151,6 +152,7 @@
 		090484671B41C25C00348F86 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoTakingHelper.swift; path = PhotoTaking/PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		0904846F1B42E01900348F86 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		090484711B43105300348F86 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		62551B631B06BF6D000913E4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		62551B641B06BF6D000913E4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		62551B651B06BF6D000913E4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -243,6 +245,22 @@
 				0904846F1B42E01900348F86 /* Post.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		09B401351B44563A00D4FFEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09B401361B44563A00D4FFEB /* Timeline */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		09B401361B44563A00D4FFEB /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */,
+			);
+			path = Timeline;
 			sourceTree = "<group>";
 		};
 		62551B621B06BF33000913E4 /* Frameworks */ = {
@@ -359,6 +377,7 @@
 		62C8C1E21B06BD6500DC3EA7 /* Makestagram */ = {
 			isa = PBXGroup;
 			children = (
+				09B401351B44563A00D4FFEB /* Views */,
 				0904846E1B42E00A00348F86 /* Models */,
 				090484661B41C1D100348F86 /* PhotoTaking */,
 				6277189C1B0A58E800AF5C6E /* Helpers */,
@@ -446,7 +465,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Make School";
+				ORGANIZATIONNAME = "Rebecca Poch";
 				TargetAttributes = {
 					62C8C1DF1B06BD6500DC3EA7 = {
 						CreatedOnToolsVersion = 6.3;
@@ -587,6 +606,7 @@
 				62C8C1E61B06BD6500DC3EA7 /* AppDelegate.swift in Sources */,
 				090484701B42E01900348F86 /* Post.swift in Sources */,
 				627718971B0A581700AF5C6E /* FilterViewController.swift in Sources */,
+				09B4013E1B44565600D4FFEB /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

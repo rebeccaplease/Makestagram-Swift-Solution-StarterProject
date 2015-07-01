@@ -50,10 +50,18 @@ class TimelineViewController: UIViewController {
             //return AnyObject array and cast into Post array(if fail, store into empty array)
             self.posts = result as? [Post] ?? [] //nil coalescing operator
             
+            //loop through and assign image to post
+            for post in self.posts {
+                let data = post.imageFile?.getData()
+                post.image = UIImage(data: data!, scale: 1.0)
+            }
+            
             //refresh table view
             self.tableView.reloadData()
         }
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -104,9 +112,10 @@ extension TimelineViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostTableViewCell
             
-        cell.textLabel!.text = "Post"
+        //cell.textLabel!.text = "Post"
+        cell.postImageView.image = posts[indexPath.row].image
         
         return cell
     }
