@@ -9,15 +9,50 @@
 import UIKit
 import Parse
 
-var photoTakingHelper: PhotoTakingHelper?
+
 
 class TimelineViewController: UIViewController {
 
+    var photoTakingHelper: PhotoTakingHelper?
+    var posts: [Post] = []
+    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.tabBarController?.delegate = self //since timeline is the first view that is loaded, put delegate in here
+        
+        //retrieve Follow relationships from current user
+        let followingQuery = PFQuery(className: "Follow")
+        followingQuery.whereKey("fromUser", equalTo:PFUser.currentUser()!)
+        
+        //retrieve Posts from Follow relationships
+        let postsFromFollowedUsers = Post.query()
+        postsFromFollowedUsers!.whereKey("user", matchesKey: "toUser", inQuery: followingQuery)
+        
+        //retrieve posts from this user
+        let postsFromThisUser = Post.query()
+        postsFromThisUser!.whereKey("user", equalTo: PFUser.currentUser()!)
+        
+        //combine queryy of two sets of posts (from user and from following users)
+        let query = PFQuery.orQueryWithSubqueries([postsFromFollowedUsers!, postsFromThisUser!])
+        
+        //retrieve user associated with posts (since Post stores a pointer to its user)
+        query.includeKey("user")
+        
+        //sort by date
+        query.orderByDescending("createdAt")
+        
+        //kick off network request
+        query.findObjectsInBackgroundWithBlock { (result: [AnyObject]?, error: NSError?) -> Void in  //completion block
+            
+            //return AnyObject array and cast into Post array(if fail, store into empty array)
+            self.posts = result as? [Post] ?? [] //nil coalescing operator
+            
+            //refresh table view
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,5 +94,20 @@ extension TimelineViewController: UITabBarControllerDelegate {
         else {
             return true // for other view controllers, just select them
         }
+    }
+}
+
+extension TimelineViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! UITableViewCell
+            
+        cell.textLabel!.text = "Post"
+        
+        return cell
     }
 }

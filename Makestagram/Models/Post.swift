@@ -59,5 +59,6 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         self.imageFile = imageFile
         saveInBackgroundWithBlock(nil)
         
+        
     }
 }
