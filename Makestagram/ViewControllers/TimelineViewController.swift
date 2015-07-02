@@ -91,6 +91,7 @@ extension TimelineViewController: UITableViewDataSource {
         let post = posts[indexPath.row]
         //start DL before post display
         post.downloadImage()
+        post.fetchLikes()
         //assign post to this cell
         cell.post = post
         
