@@ -7,10 +7,21 @@
 //
 
 import UIKit
+import Bond
 
 class PostTableViewCell: UITableViewCell {
  
     @IBOutlet weak var postImageView: UIImageView!
+    
+    var post: Post? {
+        didSet {
+            //optional binding check
+            if let post = post {
+                //binding (post.image has to be dynamic)
+                post.image ->> postImageView
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
