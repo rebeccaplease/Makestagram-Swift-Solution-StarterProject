@@ -29,12 +29,6 @@ class TimelineViewController: UIViewController {
             //return AnyObject array and cast into Post array(if fail, store into empty array)
             self.posts = result as? [Post] ?? [] //nil coalescing operator
             
-            //loop through and assign image to post
-            for post in self.posts {
-                let data = post.imageFile?.getData()
-                post.image = UIImage(data: data!, scale: 1.0)
-            }
-            
             //refresh table view
             self.tableView.reloadData()
         }
@@ -64,7 +58,7 @@ class TimelineViewController: UIViewController {
             println("Received a callback")
             
             let post = Post()
-            post.image = image
+            post.image.value = image!
             post.uploadPost()
         }
     }
@@ -90,11 +84,15 @@ extension TimelineViewController: UITableViewDataSource {
         return posts.count
     }
     
+    //called right before table view is about to present a cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostTableViewCell
             
-        //cell.textLabel!.text = "Post"
-        cell.postImageView.image = posts[indexPath.row].image
+        let post = posts[indexPath.row]
+        //start DL before post display
+        post.downloadImage()
+        //assign post to this cell
+        cell.post = post
         
         return cell
     }
