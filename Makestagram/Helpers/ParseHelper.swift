@@ -62,7 +62,7 @@ class ParseHelper {
     
     static func likePost(user: PFUser, post: Post) {
         
-        let likeObject = PFObject(className: "ParseLikeClass")
+        let likeObject = PFObject(className: ParseLikeClass)
         likeObject[ParseLikeFromUser] = user
         likeObject[ParseLikeToPost] = post
         
