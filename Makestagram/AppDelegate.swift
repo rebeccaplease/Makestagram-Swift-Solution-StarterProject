@@ -8,32 +8,72 @@
 
 import UIKit
 import Parse
+import FBSDKCoreKit
+import ParseUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var parseLoginHelper: ParseLoginHelper!
+    
+    override init() {
+        super.init()
+        
+        parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+            // Initialize the ParseLoginHelper with a callback
+            if let error = error {
+                // display error
+                ErrorHandling.defaultErrorHandler(error)
+            } else  if let user = user {
+                // if login was successful, display the TabBarController
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let tabBarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UIViewController
+                // present view controller
+                self.window?.rootViewController!.presentViewController(tabBarController, animated:true, completion:nil)
+            }
+        }
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         Parse.setApplicationId("ENktTesGp5FDKrb2oNlqygsfBt3IcKSLvWxmE5Rr", clientKey: "d34Gv2ldmcFY77XHaz9eIsiagmaeHWwAqH2xEG6y")
         
-        PFUser.logInWithUsername("test", password: "test")
-        
-        if let user = PFUser.currentUser() {
-            println("Login successful")
-        }
-        else {
-            println("No logged in user :(")
-        }
-        
         let acl = PFACL()
         acl.setPublicReadAccess(true) //public read
         PFACL.setDefaultACL(acl, withAccessForCurrentUser: true) //default: user write to own post
         
-        return true
+        // Initialize Facebook
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+        
+        // check if we have logged in user
+        let user = PFUser.currentUser()
+        
+        let startViewController: UIViewController;
+        
+        if (user != nil) {
+            // if we have a user, set the TabBarController to be the initial View Controller
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            startViewController = storyboard.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+        } else {
+            // Otherwise set the LoginViewController to be the first
+            let loginViewController = PFLogInViewController()
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.delegate = parseLoginHelper
+            loginViewController.signUpController?.delegate = parseLoginHelper
+            
+            startViewController = loginViewController
+        }
+        
+        // create UIWindow for app (container for all views in app)
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        //set starting view controller
+        self.window?.rootViewController = startViewController;
+        self.window?.makeKeyAndVisible()
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -52,6 +92,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+       
+        //MARK: Facebook Integration
+        
+        func applicationDidBecomeActive(application: UIApplication) {
+            FBSDKAppEvents.activateApp()
+        }
+        
+        func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+        }
     }
     
     func applicationWillTerminate(application: UIApplication) {
