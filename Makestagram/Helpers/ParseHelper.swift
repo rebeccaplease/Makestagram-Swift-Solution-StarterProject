@@ -137,7 +137,7 @@ class ParseHelper {
     :param: user    The user that is following
     :param: toUser  The user that is being followed
     */
-    static func removeFollowRelationship(user: PFUser, toUser: PFUser) {
+    static func removeFollowRelationshipFromUser(user: PFUser, toUser: PFUser) {
         let query = PFQuery(className: ParseFollowClass)
         
         query.whereKey(ParseFollowFromUser, equalTo: user)
