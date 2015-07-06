@@ -110,6 +110,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="yl9-aI-rZt" id="0mi-AN-Eba"/>
+                                    <outlet property="delegate" destination="yl9-aI-rZt" id="M9M-gy-KDG"/>
                                 </connections>
                             </tableView>
                         </subviews>

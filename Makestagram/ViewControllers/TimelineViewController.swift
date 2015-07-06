@@ -8,50 +8,66 @@
 
 import UIKit
 import Parse
+import ConvenienceKit
 
 
-
-class TimelineViewController: UIViewController {
-
+class TimelineViewController: UIViewController, TimelineComponentTarget {
+    
     var photoTakingHelper: PhotoTakingHelper?
-    var posts: [Post] = []
+    
+    //handles saving posts
+    var timelineComponent: TimelineComponent<Post, TimelineViewController>!
+    
+    let defaultRange = 0...4
+    let additionalRangeSize = 5
     
     @IBOutlet weak var tableView: UITableView!
-    override func viewDidAppear(animated: Bool) {
     
-        super.viewDidAppear(animated)
-
-        // Do any additional setup after loading the view.
-        self.tabBarController?.delegate = self //since timeline is the first view that is loaded, put delegate in here
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        ParseHelper.timelineRequestForCurrentUser { (result: [AnyObject]?, error: NSError?) -> Void in  //completion block
+        timelineComponent = TimelineComponent(target: self)
+        
+        self.tabBarController?.delegate = self //since timeline is the first view that is loaded, put delegate in here
+    }
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+      timelineComponent.loadInitialIfRequired()
+        
+        //loadInRange(defaultRange) { <#([Post]?) -> Void##([Post]?) -> Void#>)  -> Void in
+        
+        
+    }
+    
+    func loadInRange(range: Range<Int>, completionBlock: ([Post]?) -> Void) {
+        
+        ParseHelper.timelineRequestForCurrentUser(range) { (result: [AnyObject]?, error: NSError?) -> Void in  //completion block
             
             //return AnyObject array and cast into Post array(if fail, store into empty array)
-            self.posts = result as? [Post] ?? [] //nil coalescing operator
+            let posts = result as? [Post] ?? [] //nil coalescing operator
             
-            //refresh table view
-            self.tableView.reloadData()
+            completionBlock(posts)
         }
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
     func takePhoto() {
         // instantiate photo taking class, provide callback when photo is selected
         photoTakingHelper = PhotoTakingHelper(viewController: self.tabBarController!) { (image: UIImage?) in //trailing closure
@@ -78,17 +94,24 @@ extension TimelineViewController: UITabBarControllerDelegate {
     }
 }
 
+extension TimelineViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        timelineComponent.targetWillDisplayEntry(indexPath.row)
+    }
+}
+
 extension TimelineViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return timelineComponent.content.count
     }
     
     //called right before table view is about to present a cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostTableViewCell
-            
-        let post = posts[indexPath.row]
+        
+        let post = timelineComponent.content[indexPath.row]
         //start DL before post display
         post.downloadImage()
         post.fetchLikes()
@@ -98,3 +121,4 @@ extension TimelineViewController: UITableViewDataSource {
         return cell
     }
 }
+

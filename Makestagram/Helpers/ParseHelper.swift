@@ -33,7 +33,7 @@ class ParseHelper {
     // User Relation
     static let ParseUserUsername      = "username"
     
-    static func timelineRequestForCurrentUser(completionBlock: PFArrayResultBlock) {
+    static func timelineRequestForCurrentUser(range: Range<Int>, completionBlock: PFArrayResultBlock) {
         
         //retrieve Follow relationships from current user
         let followingQuery = PFQuery(className: ParseFollowClass)
@@ -55,6 +55,11 @@ class ParseHelper {
         
         //sort by date
         query.orderByDescending(ParsePostCreatedAt)
+        
+        
+        query.skip = range.startIndex
+        //load this chunk
+        query.limit = range.endIndex - range.startIndex
         
         //kick off network request
         query.findObjectsInBackgroundWithBlock(completionBlock)
