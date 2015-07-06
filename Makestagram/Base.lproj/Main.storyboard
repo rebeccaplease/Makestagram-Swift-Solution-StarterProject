@@ -180,7 +180,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell " id="SRb-Nd-6nq" userLabel="UserCell" customClass="FriendSearchTableViewCell" customModule="Makestagram" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="SRb-Nd-6nq" userLabel="UserCell" customClass="FriendSearchTableViewCell" customModule="Makestagram" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SRb-Nd-6nq" id="E43-AH-CLW">
@@ -189,7 +189,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xs4-fq-rGB">
                                                     <rect key="frame" x="8" y="8" width="584" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cux-hG-uVY">
@@ -199,7 +199,7 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="followButtonTapped:" destination="SRb-Nd-6nq" eventType="touchUpInside" id="UWa-m7-CiQ"/>
+                                                        <action selector="followButtonTapped:" destination="SRb-Nd-6nq" eventType="touchUpInside" id="b8j-7O-Ysf"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -221,13 +221,13 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="followButton" destination="Cux-hG-uVY" id="8g2-m9-wa3"/>
-                                            <outlet property="usernameLabel" destination="Xs4-fq-rGB" id="ezp-5g-Nl9"/>
+                                            <outlet property="followButton" destination="Cux-hG-uVY" id="1x6-1E-uCt"/>
+                                            <outlet property="usernameLabel" destination="Xs4-fq-rGB" id="Miy-zK-B7c"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="mI6-9q-sXP" id="nmI-Es-tdt"/>
+                                    <outlet property="dataSource" destination="mI6-9q-sXP" id="L9H-uc-11f"/>
                                 </connections>
                             </tableView>
                         </subviews>
