@@ -98,3 +98,11 @@ class ParseHelper {
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
 }
+
+extension PFObject : Equatable {
+    
+}
+//redefine equality to refer to same object id (not same object. because the current user can be rep by diff objects
+public func ==(lhs: PFObject, rhs: PFObject) -> Bool {
+    return lhs.objectId == rhs.objectId
+}
