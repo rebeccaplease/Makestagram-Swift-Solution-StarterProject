@@ -63,6 +63,7 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
     }
     
     func downloadImage() {
+        //image.value = Post.imageCache[self.imageFile!.name]
         //if not already downloaded, download image
         if (image.value == nil) {
             //start DL in background
@@ -71,6 +72,7 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
                     let image = UIImage(data: data, scale: 1.0)!
                     //assign downloaded image to image in post
                     self.image.value = image
+                    //Post.imageCache[self.imageFile!.name] = image
                 }
             }
         }
