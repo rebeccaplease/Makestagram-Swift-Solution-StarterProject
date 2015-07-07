@@ -10,6 +10,7 @@ import Foundation
 import Parse
 import UIKit
 import Bond
+import ConvenienceKit
 
 class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclassing to conform to protocol
     
@@ -19,6 +20,8 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
     var image: Dynamic<UIImage?> = Dynamic(nil)
     var likes: Dynamic<[PFUser]?> = Dynamic(nil) //nil before DL
     var photoUploadTask: UIBackgroundTaskIdentifier?
+    
+    static var imageCache: NSCacheSwift<String, UIImage>!
     
     //MARK: PFSubclassing Protocol
     //connect parse class and swift class
@@ -32,10 +35,12 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
     }
     
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0
+        var onceToken : dispatch_once_t = 0;
         dispatch_once(&onceToken) {
-            //inform parse about this subclass
+            // inform Parse about this subclass
             self.registerSubclass()
+            // empty cache
+            Post.imageCache = NSCacheSwift<String, UIImage>()
         }
     }
     
@@ -63,7 +68,8 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
     }
     
     func downloadImage() {
-        //image.value = Post.imageCache[self.imageFile!.name]
+        //assign from cache if possible
+        image.value = Post.imageCache[self.imageFile!.name]
         //if not already downloaded, download image
         if (image.value == nil) {
             //start DL in background
@@ -72,7 +78,8 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
                     let image = UIImage(data: data, scale: 1.0)!
                     //assign downloaded image to image in post
                     self.image.value = image
-                    //Post.imageCache[self.imageFile!.name] = image
+                    //store in cache
+                    Post.imageCache[self.imageFile!.name] = image
                 }
             }
         }
