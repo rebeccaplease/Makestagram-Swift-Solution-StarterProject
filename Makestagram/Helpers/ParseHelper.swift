@@ -71,7 +71,7 @@ class ParseHelper {
         likeObject[ParseLikeFromUser] = user
         likeObject[ParseLikeToPost] = post
         
-        likeObject.saveInBackgroundWithBlock(nil)
+        likeObject.saveInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
     }
     
     static func unlikePost(user: PFUser, post: Post) {
@@ -90,7 +90,7 @@ class ParseHelper {
             if let results = results as? [PFObject] {
                 //iterate through results (in case more than one..)
                 for likes in results  {
-                    likes.deleteInBackgroundWithBlock(nil)
+                    likes.deleteInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
                 }
             }
         }
@@ -131,8 +131,8 @@ class ParseHelper {
         
         followObject.setObject(user, forKey: ParseFollowFromUser)
         followObject.setObject(toUser, forKey: ParseFollowToUser)
-        
-        followObject.saveInBackgroundWithBlock(nil)
+    
+        followObject.saveInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
     }
     /**
     Deletes a follow relationship between two users.
@@ -154,7 +154,7 @@ class ParseHelper {
             if let results = results as? [PFObject] {
                 //iterate through results (in case more than one..)
                 for follow in results  {
-                    follow.deleteInBackgroundWithBlock(nil)
+                    follow.deleteInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
                 }
             }
         }

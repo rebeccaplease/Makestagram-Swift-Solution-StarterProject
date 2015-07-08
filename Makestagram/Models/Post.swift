@@ -67,7 +67,7 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         user = PFUser.currentUser()
         //store image in parse
         self.imageFile = imageFile
-        saveInBackgroundWithBlock(nil)
+        saveInBackgroundWithBlock(ErrorHandling.errorHandlingCallback)
     }
     
     func downloadImage() {
