@@ -45,6 +45,9 @@ class TimelineViewController: UIViewController, TimelineComponentTarget {
         
         ParseHelper.timelineRequestForCurrentUser(range) { (result: [AnyObject]?, error: NSError?) -> Void in  //completion block
             
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             //return AnyObject array and cast into Post array(if fail, store into empty array)
             let posts = result as? [Post] ?? [] //nil coalescing operator
             

@@ -57,6 +57,9 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         
         //end task after save (completion handler)
         imageFile.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
         }
         
@@ -74,6 +77,9 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         if (image.value == nil) {
             //start DL in background
             imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+                if let error = error {
+                    ErrorHandling.defaultErrorHandler(error)
+                }
                 if let data = data {
                     let image = UIImage(data: data, scale: 1.0)!
                     //assign downloaded image to image in post
@@ -92,7 +98,9 @@ class Post : PFObject, PFSubclassing { //custom PFObject, inherit form PFSubclas
         }
         //get likes for this post
         ParseHelper.likesForPosts(self, completionBlock: { (var likes: [AnyObject]?, error: NSError?) -> Void in
-            
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             //filter out users that don't exist anymore
             likes = likes?.filter { like in like[ParseHelper.ParseLikeFromUser] != nil
             }

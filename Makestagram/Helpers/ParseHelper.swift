@@ -83,6 +83,9 @@ class ParseHelper {
         query.whereKey(ParseLikeToPost, equalTo: post)
         
         query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             //optional binding
             if let results = results as? [PFObject] {
                 //iterate through results (in case more than one..)
@@ -144,6 +147,9 @@ class ParseHelper {
         query.whereKey(ParseFollowToUser, equalTo: toUser)
         
         query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
+            if let error = error {
+                ErrorHandling.defaultErrorHandler(error)
+            }
             //optional binding
             if let results = results as? [PFObject] {
                 //iterate through results (in case more than one..)
