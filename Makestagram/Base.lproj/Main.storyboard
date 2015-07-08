@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="470" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TlZ-e7-9OI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="470" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TlZ-e7-9OI">
                                 <rect key="frame" x="0.0" y="20" width="600" height="531"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -34,7 +34,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62q-eE-IdC">
-                                                    <rect key="frame" x="552" y="401" width="44" height="44"/>
+                                                    <rect key="frame" x="552" y="402" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="ABd-qS-O5f"/>
                                                         <constraint firstAttribute="width" constant="44" id="EER-yl-7Oq"/>
@@ -49,7 +49,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swA-o1-umE">
-                                                    <rect key="frame" x="8" y="407" width="44" height="44"/>
+                                                    <rect key="frame" x="8" y="408" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="kGN-Ix-MXd"/>
                                                         <constraint firstAttribute="height" constant="44" id="wU0-ci-2qs"/>
@@ -62,14 +62,14 @@
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="pe3-Ps-dBH">
-                                                    <rect key="frame" x="20" y="367" width="20" height="20"/>
+                                                    <rect key="frame" x="20" y="368" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="WU3-Xk-BzX"/>
                                                         <constraint firstAttribute="height" constant="20" id="vYG-FG-1mA"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsP-G9-nGx">
-                                                    <rect key="frame" x="60" y="366" width="482" height="21"/>
+                                                    <rect key="frame" x="60" y="367" width="482" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="94Z-r0-O2Z"/>
                                                     </constraints>
@@ -105,6 +105,47 @@
                                             <outlet property="likesLabel" destination="KsP-G9-nGx" id="W7j-Jp-AVf"/>
                                             <outlet property="moreButton" destination="swA-o1-umE" id="57V-iI-goM"/>
                                             <outlet property="postImageView" destination="gck-ra-g7I" id="SYX-3o-PBu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostHeader" rowHeight="40" id="dDP-A3-Zi2" customClass="PostSectionHeaderView" customModule="Makestagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dDP-A3-Zi2" id="7VD-gS-77I">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXe-pn-2xC">
+                                                    <rect key="frame" x="8" y="12" width="37" height="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock" translatesAutoresizingMaskIntoConstraints="NO" id="y2B-Fp-inX">
+                                                    <rect key="frame" x="572" y="10" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Khd-aP-iNR"/>
+                                                        <constraint firstAttribute="width" constant="20" id="dyU-Pl-8CY"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLI-yL-feb">
+                                                    <rect key="frame" x="527" y="11" width="37" height="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="wLI-yL-feb" secondAttribute="centerY" id="4DW-a8-blV"/>
+                                                <constraint firstAttribute="centerY" secondItem="y2B-Fp-inX" secondAttribute="centerY" id="QeF-ZZ-p4m"/>
+                                                <constraint firstItem="y2B-Fp-inX" firstAttribute="leading" secondItem="wLI-yL-feb" secondAttribute="trailing" constant="8" id="hmG-0W-En7"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="y2B-Fp-inX" secondAttribute="trailing" id="iDC-58-XMo"/>
+                                                <constraint firstItem="KXe-pn-2xC" firstAttribute="leading" secondItem="7VD-gS-77I" secondAttribute="leadingMargin" id="k3O-hg-K7m"/>
+                                                <constraint firstAttribute="centerY" secondItem="KXe-pn-2xC" secondAttribute="centerY" id="p2A-Yq-EDL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="postTimeLabel" destination="wLI-yL-feb" id="Gmu-Hm-r5Q"/>
+                                            <outlet property="usernameLabel" destination="KXe-pn-2xC" id="s7i-8v-8HA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -280,6 +321,7 @@
         <image name="Add" width="42" height="42"/>
         <image name="Camera" width="40" height="30"/>
         <image name="Check" width="42" height="42"/>
+        <image name="Clock" width="22" height="22"/>
         <image name="Heart" width="72" height="68"/>
         <image name="HeartSelected" width="72" height="68"/>
         <image name="Home" width="38" height="36"/>

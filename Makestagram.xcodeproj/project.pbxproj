@@ -13,6 +13,7 @@
 		090484701B42E01900348F86 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0904846F1B42E01900348F86 /* Post.swift */; };
 		090484721B43105300348F86 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090484711B43105300348F86 /* TimelineViewController.swift */; };
 		098561E61B4ADFCB00503C50 /* FriendSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098561E51B4ADFCB00503C50 /* FriendSearchTableViewCell.swift */; };
+		099FA0FD1B4D7C800026A1AC /* PostSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099FA0FC1B4D7C800026A1AC /* PostSectionHeaderView.swift */; };
 		09B4013E1B44565600D4FFEB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */; };
 		09B401441B44732A00D4FFEB /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B401431B44732A00D4FFEB /* ParseHelper.swift */; };
 		62551B6C1B06BF6D000913E4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B631B06BF6D000913E4 /* Bolts.framework */; };
@@ -155,6 +156,7 @@
 		0904846F1B42E01900348F86 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		090484711B43105300348F86 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		098561E51B4ADFCB00503C50 /* FriendSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendSearchTableViewCell.swift; sourceTree = "<group>"; };
+		099FA0FC1B4D7C800026A1AC /* PostSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostSectionHeaderView.swift; sourceTree = "<group>"; };
 		09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		09B401431B44732A00D4FFEB /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		62551B631B06BF6D000913E4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				09B4013D1B44565600D4FFEB /* PostTableViewCell.swift */,
+				099FA0FC1B4D7C800026A1AC /* PostSectionHeaderView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				62C8C1E61B06BD6500DC3EA7 /* AppDelegate.swift in Sources */,
 				098561E61B4ADFCB00503C50 /* FriendSearchTableViewCell.swift in Sources */,
 				090484701B42E01900348F86 /* Post.swift in Sources */,
+				099FA0FD1B4D7C800026A1AC /* PostSectionHeaderView.swift in Sources */,
 				627718971B0A581700AF5C6E /* FilterViewController.swift in Sources */,
 				09B401441B44732A00D4FFEB /* ParseHelper.swift in Sources */,
 				09B4013E1B44565600D4FFEB /* PostTableViewCell.swift in Sources */,

@@ -98,23 +98,39 @@ extension TimelineViewController: UITabBarControllerDelegate {
 }
 
 extension TimelineViewController: UITableViewDelegate {
-    
+    //display header
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         timelineComponent.targetWillDisplayEntry(indexPath.row)
+    }
+    //display post
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("PostHeader") as! PostSectionHeaderView
+        
+        let post = self.timelineComponent.content[section]
+        headerCell.post = post
+        
+        return headerCell
+    }
+    //set height of header
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
 }
 
 extension TimelineViewController: UITableViewDataSource {
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.timelineComponent.content.count
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timelineComponent.content.count
+        return 1
     }
     
     //called right before table view is about to present a cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("PostCell") as! PostTableViewCell
         
-        let post = timelineComponent.content[indexPath.row]
+        let post = timelineComponent.content[indexPath.section]
         //start DL before post display
         post.downloadImage()
         post.fetchLikes()
